@@ -1,9 +1,8 @@
 /**
  * Created by BG236557 on 2016/5/27.
  */
-import React, {
-    Component
-} from 'react';
+import React, {Component} from 'react';
+import {empty}            from "./Util";
 
 export default class Row extends Component {
     constructor(props) {
@@ -28,10 +27,11 @@ export default class Row extends Component {
 
         if (isSelect && !hideSelectColumn) {
             output.push(
-                <td key={_key} style={{backgroundColor: checked && selectRow.bgColor, textAlign: 'center'}}>
+                <td key={_key} style={{backgroundColor: checked && selectRow.bgColor, textAlign: 'center'}}
+                    data-input={selectRow.mode}>
                     <input type={selectRow.mode} checked={checked} readOnly={true}/>
                 </td>
-            )
+            );
         }
 
         cols.map((key, i, col) => {
@@ -42,7 +42,7 @@ export default class Row extends Component {
                 maxWidth: key.width,
                 textAlign: key.dataAlign,
                 display: key.hidden && 'none',
-                backgroundColor: isSelect && checked && selectRow.bgColor
+                backgroundColor: isSelect && checked && (selectRow.bgColor || "#ffd800")
             };
 
             if (dataFormat) {
@@ -54,7 +54,7 @@ export default class Row extends Component {
                 colSpan = props.colSpan + i;
                 colTarget = i;
             }
-            if (props.colSpan === 0 || props.rowSpan === 0)return;
+            if (props.colSpan === 0 || props.rowSpan === 0) return;
             output.push(
                 <td style={style}
                     key={'' + _key + i}
@@ -64,7 +64,7 @@ export default class Row extends Component {
                 >
                     {cell}
                 </td>
-            )
+            );
         });
         return output;
     }
@@ -90,10 +90,17 @@ export default class Row extends Component {
                 }}>
                 {this.cellRender()}
             </tr>
-        )
+        );
     }
 }
 
 Row.defaultProps = {
     hideSelectColumn: false,
+    selectRow: {
+        mode: 'none',
+        bgColor: '#ffd800',
+        selected: [],
+        onSelect: empty,
+        onSelectAll: empty
+    }
 };

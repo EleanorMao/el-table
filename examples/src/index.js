@@ -1,14 +1,8 @@
 import '../../lib/style/table.css';
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import {
-    Table,
-    Col
-} from '../../lib/Index.js';
-import {
-    data,
-    list
-} from './fackData';
+import ReactDOM           from 'react-dom';
+import {Table, Col}       from '../../src/Index.js';
+import {data, list}       from './fackData';
 
 class Main extends Component {
     constructor() {
@@ -19,13 +13,13 @@ class Main extends Component {
             length: 10,
             data: data,
             selected: [],
-        }
+        };
     }
 
     render() {
         const dataFormat = {
             "a": function (cell, level, row) {
-                return cell + ' I am level ' + level
+                return cell + ' I am level ' + level;
             },
             "b": function (cell, level, row, index, col) {
                 if (level != 0) {
@@ -33,7 +27,7 @@ class Main extends Component {
                     // return row[key.id || key];
                     return '';
                 } else {
-                    return cell + ' I am row b'
+                    return cell + ' I am row b';
                 }
             },
             "c": function (cell, level, row, index, col) {
@@ -41,7 +35,7 @@ class Main extends Component {
                     let key = col[index - 2];
                     return row[key.id || key];
                 } else {
-                    return cell
+                    return cell;
                 }
             },
             "d": function (cell, level, row, index, col) {
@@ -49,7 +43,7 @@ class Main extends Component {
                     let key = col[index - 1];
                     return row[key.id || key];
                 } else {
-                    return cell + 1
+                    return cell + 1;
                 }
             }
         };
@@ -74,25 +68,25 @@ class Main extends Component {
                     this.setState(old => {
                         old.selected = checkedList;
                         return old;
-                    })
+                    });
                 } else {
                     this.setState(old => {
                         old.selected = [];
                         return old;
-                    })
+                    });
                 }
             },
             onSelect: (checked, row) => {
                 if (checked) {
                     this.setState(old => {
                         old.selected.push(row.id);
-                        return old
-                    })
+                        return old;
+                    });
                 } else {
                     this.setState(old => {
                         old.selected.splice(old.selected.indexOf(row.id), 1);
                         return old;
-                    })
+                    });
                 }
             }
         };
@@ -111,17 +105,17 @@ class Main extends Component {
                         <Col dataField="id" dataAlign="center" colSpan={2}>id</Col>
                         <Col dataAlign='center' dataField='regionRoleName' colSpan={2}>区域角色</Col>
                         <Col dataAlign='center' dataField='systemRoleName'>系统角色</Col>
-                        <Col dataAlign='center' dataField='region' render={(index)=> {
+                        <Col dataAlign='center' dataField='region' render={(index) => {
                             if (index == 3) {
-                                return {colSpan: 2, rowSpan: 2}
+                                return {colSpan: 2, rowSpan: 2};
                             }
                             if (index == 4) {
-                                return {rowSpan: 0}
+                                return {rowSpan: 0};
                             }
                         }}>区域</Col>
-                        <Col dataAlign='center' dataField='createTime' render={(index)=> {
+                        <Col dataAlign='center' dataField='createTime' render={(index) => {
                             if (index == 4) {
-                                return {rowSpan: 0}
+                                return {rowSpan: 0};
                             }
                         }}>创建时间</Col>
                         <Col dataAlign='center' dataField='description'>描述</Col>
@@ -162,8 +156,8 @@ class Main extends Component {
                         <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
                         <Col dataAlign='center' width="150px" dataField='description'
                              dataFixed="auto">描述</Col>
-                        <Col dataAlign='center' width="150px" dataFormat={()=> {
-                            return <a href="#">freedom!</a>
+                        <Col dataAlign='center' width="150px" dataFormat={() => {
+                            return <a href="#">freedom!</a>;
                         }}>操作</Col>
                     </Table>
                 </div>
@@ -192,8 +186,8 @@ class Main extends Component {
                         <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
                         <Col dataAlign='center' width="150px" dataField='description'
                              dataFixed="auto">描述</Col>
-                        <Col dataAlign='center' width="150px" dataFormat={()=> {
-                            return <a href="#">freedom!</a>
+                        <Col dataAlign='center' width="150px" dataFormat={() => {
+                            return <a href="#">freedom!</a>;
                         }}>操作</Col>
                     </Table>
                 </div>
@@ -223,13 +217,13 @@ class Main extends Component {
                         <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
                         <Col dataAlign='center' width="150px" dataField='description'
                              dataFixed="auto">描述</Col>
-                        <Col dataAlign='center' width="150px" dataFormat={()=> {
-                            return <a href="#">freedom!</a>
+                        <Col dataAlign='center' width="150px" dataFormat={() => {
+                            return <a href="#">freedom!</a>;
                         }}>操作</Col>
                     </Table>
                 </div>
             </div>
-        )
+        );
     }
 }
 

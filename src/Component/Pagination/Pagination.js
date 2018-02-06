@@ -1,8 +1,6 @@
-import React, {
-    Component,
-    PropTypes
-} from 'react';
-import PageButton from './PageButton';
+import React, {Component} from 'react';
+import PropTypes          from 'prop-types';
+import PageButton         from './PageButton';
 
 export default class Pagination extends Component {
     constructor(props) {
@@ -49,27 +47,27 @@ export default class Pagination extends Component {
         }
         let PageButtons = [
             <PageButton
-                disabled={this.startPage === 1}
-                label={startLabel} hidden={hideStartLabel}  pgBtn={true}
-                key='start' onClick={() =>onPageChange(1, sizePerPage)}/>,
+                disabled={current === 1 || totalPages < 1}
+                label={startLabel} hidden={hideStartLabel} pgBtn={true}
+                key='start' onClick={() => onPageChange(1, sizePerPage)}/>,
             <PageButton
-                label={prevLabel} disabled={current === 1}  pgBtn={true}
-                key='prev' onClick={() =>onPageChange(current - 1, sizePerPage)}/>
+                label={prevLabel} disabled={current === 1} pgBtn={true}
+                key='prev' onClick={() => onPageChange(current - 1, sizePerPage)}/>
         ];
         for (let i = this.startPage; i < this.lastPage + 1; i++) {
             PageButtons.push(<PageButton label={i} active={current === i} key={i}
-                                         onClick={() =>onPageChange(i, sizePerPage)}/>);
+                                         onClick={() => onPageChange(i, sizePerPage)}/>);
         }
         PageButtons.push(
             <PageButton
                 label={nextLabel} disabled={current === totalPages || totalPages < 1} pgBtn={true}
-                key='next' onClick={() =>onPageChange(current + 1, sizePerPage)}/>
+                key='next' onClick={() => onPageChange(current + 1, sizePerPage)}/>
         );
         PageButtons.push(
             <PageButton
                 label={endLabel} hidden={hideEndLabel}
-                disabled={this.lastPage === totalPages}  pgBtn={true}
-                key='end' onClick={() =>onPageChange(totalPages, sizePerPage)}/>
+                disabled={current === totalPages || totalPages < 1} pgBtn={true}
+                key='end' onClick={() => onPageChange(totalPages, sizePerPage)}/>
         );
 
         return (
@@ -77,10 +75,10 @@ export default class Pagination extends Component {
                 <ul className="pagination">
                     {PageButtons}
                 </ul>
-                {showTotalPages && 
+                {showTotalPages &&
                 <span className="totalPages">共 {totalPages} 页</span>}
             </div>
-        )
+        );
     }
 }
 
@@ -92,7 +90,7 @@ Pagination.propTypes = {
     hideStartLabel: PropTypes.bool,
     showTotalPages: PropTypes.bool,
     paginationSize: PropTypes.number
-}
+};
 
 Pagination.defaultProps = {
     current: 1,
@@ -105,4 +103,4 @@ Pagination.defaultProps = {
     nextLabel: <span>下一页<span className="caret right"></span></span>,
     startLabel: '首页',
     endLabel: '尾页'
-}
+};

@@ -19,47 +19,47 @@ function contains(root, el) {
 export default class DropdownList extends Component {
     constructor(props) {
         super(props);
-        this.state = {toggle: false}
+        this.state = {toggle: false};
     }
 
     componentDidMount() {
-        window.addEventListener('click', this.clickToClose.bind(this))
+        window.addEventListener('click', this.clickToClose.bind(this));
     }
 
     componentWillUnmount() {
-        window.removeEventListener('click', this.clickToClose.bind(this))
+        window.removeEventListener('click', this.clickToClose.bind(this));
     }
 
     componentWillReceiveProps() {
         if (this.state.toggle) {
-            this.setState(old=> {
+            this.setState(old => {
                 old.toggle = false;
                 return old;
-            })
+            });
         }
     }
 
     handleToggle() {
-        this.setState(old=> {
+        this.setState(old => {
             old.toggle = !old.toggle;
             return old;
-        })
+        });
     }
 
     clickToClose(e) {
-        const target = this.refs.dropdown;
+        const target = this._dropdown;
         if (!contains(target, e.target)) {
-            this.setState(old=> {
+            this.setState(old => {
                 old.toggle = false;
                 return old;
-            })
+            });
         }
     }
 
     render() {
         const {list, children, onClick} = this.props;
         return (
-            <div className="dropdown" style={{display: 'inline-block'}} ref="dropdown">
+            <div className="dropdown" style={{display: 'inline-block'}} ref={c => this._dropdown = c}>
                 <button className="btn btn-default dropdown-toggle" type="button"
                         onClick={this.handleToggle.bind(this)}>
                     {children}
@@ -72,17 +72,17 @@ export default class DropdownList extends Component {
                             return (
                                 <li key={index}>
                                     <a href={item.href || '#'}
-                                       onClick={(e)=> {
+                                       onClick={(e) => {
                                            if (!item.href) {
                                                e.preventDefault();
                                            }
-                                           onClick(item)
+                                           onClick(item);
                                        }}>{item.label || item}</a>
                                 </li>);
                         })
                     }
                 </ul>
             </div>
-        )
+        );
     }
 }

@@ -14,7 +14,7 @@ export let isArr = function (input) {
 
 export let diff = function (a, b) {
     return a.filter(x => {
-        return b.indexOf(x) === -1
+        return b.indexOf(x) === -1;
     });
 };
 
@@ -71,7 +71,7 @@ export let sort = function (arr) {
         }
     }
     let sorted = left.concat(auto).concat(right);
-    return {sorted, left, right}
+    return {sorted, left, right};
 };
 
 export let addEvent = function (el, event, listener) {
@@ -82,7 +82,7 @@ export let addEvent = function (el, event, listener) {
     } else {
         el['on' + event] = listener;
     }
-}
+};
 
 export let removeEvent = function (el, event, listener) {
     if (el.removeEventListener) {
@@ -90,4 +90,15 @@ export let removeEvent = function (el, event, listener) {
     } else if (el.detachEvent) {
         el.attachEvent('on' + event, listener);
     }
-}
+};
+
+export let toArray = function (input) {
+    if (!input) return [];
+    let output = [];
+    try {
+        output = [].slice.call(input);
+    } catch (e) {
+        output = [].concat.apply([], input).slice(1);
+    }
+    return output;
+};

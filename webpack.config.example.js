@@ -1,6 +1,7 @@
 /**
  * Created by elly on 16/5/31.
  */
+const path = require('path');
 const webpack = require('webpack');
 const Nyan = require('nyan-progress-webpack-plugin');
 const openBrowserPlugin = require('open-browser-webpack-plugin');
@@ -11,6 +12,12 @@ module.exports = {
         path: './examples/lib',
         filename: 'index.js',
         publicPath: "http://127.0.0.1:9010/lib"
+    },
+    resolve: {
+        alias: {
+            'react': path.join(__dirname, 'node_modules', 'react'),
+            'react-dom': path.join(__dirname, 'node_modules', 'react-dom'),
+        }
     },
     module: {
         loaders: [{
