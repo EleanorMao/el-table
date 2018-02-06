@@ -34,6 +34,7 @@ ReactDOM.render(
 * **dataSize[Number]** total size of data, only useful when remote `enabled`
 * **sortOrder[String]** sort order, `asc` or `desc`
 * **sortName[String]** sort field in table
+* **stretchable[Boolean]** column stretchable
 * **onSortChange[Function(sortName, sortOrder)]** sort function, `sortOrder` will be `asc` or `desc`
 * **topPagination[Boolean]** default is `false`, set `true` to enable pagination in top
 * **pagination[Boolean]** default is `false`, set `true` to enable pagination in bottom
@@ -45,6 +46,7 @@ ReactDOM.render(
     * **endLabel[String | Number | Node]** customize page button of back to last page
     * **sizePerPage[Number]** size per page, default is `10`
     * **paginationSize[Number]** pagination bar length, default is `6`
+    * **hidePaginationWhileNoData[Boolean]** hide pagination while no data, default is `false`
     * **showTotalPages[Boolean]** default id `true`, whether show total pages or not
     * **onPageChange[Function(page, sizePerPage)]** callback when page changed
     * **paginationShowsTotal[Boolean | Function(start, to , total)]** display a text that the total number and current lines displayed, default is `false`
